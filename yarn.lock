@@ -5345,10 +5345,10 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-native-firebaseui-auth@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-firebaseui-auth/-/react-native-firebaseui-auth-1.4.0.tgz#58a36c18f3b2a0156ae3c664e2c2062857c77505"
-  integrity sha512-yGj6PzdNUKu/dVnhZXTSqSQqbqHF+wd+si1g3/L1D3v4wv/7BXyfBS+eBQK5ASBep7LOaWV0wbweXRL8cb1L5Q==
+react-native-firebaseui-auth@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-firebaseui-auth/-/react-native-firebaseui-auth-1.4.1.tgz#2023006808117b0b87baa228f3f3c29ee1cb1955"
+  integrity sha512-ZHtdbHMV5a5f5aTnMzaqYw44Ce36IrndDl3CSlz99M5EdnUXlJEBfW8F3Vk3yc0k6KZov/JKiVrF2K1q0h9eXA==
 
 react-native@0.72.3:
   version "0.72.3"
