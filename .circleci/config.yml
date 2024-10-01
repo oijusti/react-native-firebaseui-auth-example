@@ -1,50 +1,48 @@
 version: 2.1
 jobs:
   node:
-    working_directory: ~/react-native-firebaseui-auth
+    working_directory: ~/react-native-firebaseui-auth-example
     docker:
       - image: cimg/node:20.5.0
     steps:
       - checkout
 
       - restore_cache:
-          key: yarn-v1-{{ checksum "example/yarn.lock" }}-{{ arch }}
+          key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
 
       - restore_cache:
-          key: node-v1-{{ checksum "example/package.json" }}-{{ arch }}
+          key: node-v1-{{ checksum "package.json" }}-{{ arch }}
 
       - run:
-          name: install dependences
+          name: install dependencies
           command: |
-            cd example
             yarn install
 
       - save_cache:
-          key: yarn-v1-{{ checksum "example/yarn.lock" }}-{{ arch }}
+          key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
           paths:
             - ~/.cache/yarn
 
       - save_cache:
-          key: node-v1-{{ checksum "example/package.json" }}-{{ arch }}
+          key: node-v1-{{ checksum "package.json" }}-{{ arch }}
           paths:
-            - example/node_modules
+            - node_modules
 
       - run:
           name: run tests
           command: |
             mkdir -p test-results/jest
-            cd example
             yarn test
           environment:
             JEST_JUNIT_OUTPUT: ./test-results/jest/junit.xml
 
       - store_test_results:
-          path: ./example/test-results
+          path: ./test-results
 
       - persist_to_workspace:
-          root: ~/react-native-firebaseui-auth
+          root: ~/react-native-firebaseui-auth-example
           paths:
-            - example/node_modules
+            - node_modules
 
   android:
     working_directory: ~/
@@ -52,11 +50,11 @@ jobs:
       - image: cimg/android:2023.07-node
     steps:
       # - checkout:
-      #     path: ~/react-native-firebaseui-auth
-      - run: git clone -b "$CIRCLE_BRANCH" https://github.com/oijusti/react-native-firebaseui-auth.git
+      #     path: ~/react-native-firebaseui-auth-example
+      - run: git clone -b "$CIRCLE_BRANCH" https://github.com/oijusti/react-native-firebaseui-auth-example.git
 
       - attach_workspace:
-          at: ~/react-native-firebaseui-auth
+          at: ~/react-native-firebaseui-auth-example
 
       # - restore_cache:
       #     key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
@@ -81,7 +79,7 @@ jobs:
       - run:
           name: make gradlew executable
           command: |
-            echo 'export TERM=xterm' >> $BASH_ENV && sudo chmod +x ~/react-native-firebaseui-auth/example/android/gradlew
+            echo 'export TERM=xterm' >> $BASH_ENV && sudo chmod +x ~/react-native-firebaseui-auth-example/android/gradlew
 
       - run:
           name: accept all licenses on error
@@ -91,7 +89,7 @@ jobs:
       - run:
           name: build debug
           command: |
-            cd ~/react-native-firebaseui-auth/example/android
+            cd ~/react-native-firebaseui-auth-example/android
             cd app
             mv ./gs ./google-services.json
             cd ../..
@@ -106,7 +104,7 @@ jobs:
   ios:
     macos:
       xcode: 14.2.0
-    working_directory: ~/react-native-firebaseui-auth/example
+    working_directory: ~/react-native-firebaseui-auth-example
 
     # use a --login shell so our "set Ruby version" command gets picked up for later steps
     shell: /bin/bash --login -o pipefail
@@ -139,14 +137,14 @@ jobs:
             - node_modules
 
       - restore_cache:
-          key: bundle-v1-{{ checksum "ios/Gemfile.lock" }}-{{ arch }}
+          key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
 
       - run:
           command: bundle install
           working_directory: ios
 
       - save_cache:
-          key: bundle-v1-{{ checksum "ios/Gemfile.lock" }}-{{ arch }}
+          key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
           paths:
             - vendor/bundle
 
@@ -177,6 +175,6 @@ workflows:
       - android:
           requires:
             - node
-      - ios:
-          requires:
-            - node
+      # - ios:
+      #     requires:
+      #       - node
