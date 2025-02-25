@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
+import type { PropsWithChildren } from 'react';
 import {
   Button,
   SafeAreaView,
@@ -32,7 +32,7 @@ type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
-function Section({children, title}: SectionProps): JSX.Element {
+function Section({ children, title }: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -58,7 +58,7 @@ function Section({children, title}: SectionProps): JSX.Element {
   );
 }
 
-function App(): JSX.Element {
+function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -77,10 +77,10 @@ function App(): JSX.Element {
         <Header />
         <View
           // eslint-disable-next-line react-native/no-inline-styles
-          style={{alignItems: 'center'}}>
+          style={{ alignItems: 'center' }}>
           <Text
             // eslint-disable-next-line react-native/no-inline-styles
-            style={{fontWeight: 'bold', fontSize: 24}}>
+            style={{ fontWeight: 'bold', fontSize: 24 }}>
             Firebase UI Auth Example
           </Text>
           <View

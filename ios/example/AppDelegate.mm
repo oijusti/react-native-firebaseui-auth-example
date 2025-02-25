@@ -1,5 +1,4 @@
 #import "AppDelegate.h"
-#import <FirebaseCore.h>
 
 #import <React/RCTBundleURLProvider.h>
 
@@ -12,12 +11,15 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
 
-  [FIRApp configure];
-
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
+{
+  return [self bundleURL];
+}
+
+- (NSURL *)bundleURL
 {
 #if DEBUG
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];

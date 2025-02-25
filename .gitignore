@@ -68,3 +68,6 @@ yarn-error.log
 # oijusti
 .yalc
 yalc.lock
+.yarn
+
+google-services.json
